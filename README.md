@@ -28,7 +28,7 @@ These are more application-specifc.  These are some of the ones Ghost Patrol use
 Event | Syntax | Semantics
 ------ | ------ | ------
 `OSC` | `OSC address args` | Send an OSC message to the `address` with the specified arguments. E.g., `OSC /Maglocks/Safe 0`
-`DMX` | `DMX address val1 [val2 ...]` | Set one or more DMX controlled lights with consecutive addresses, starting at `address`.  (Addresses can be named for ease of use) E.g, `DMX Sconces 0 0 0.5 0.5 1`
+`DMX` | `DMX address val1 [val2 ...]` | Set one or more DMX controlled lights with consecutive addresses, starting at `address`.  Non-numeric addresses are looked up in a table to get their actual numeric adddress.   E.g, `DMX Sconces 0 0 0.5 0.5 1`
 `Audio` | `Audio file.wav gain speaker_mapping` | Plays a sound effect or music file named `file.wav`, with `gain`, routing audio according to the named speaker configuration `speaker_mapping`.  
 `GameState` | `GameState component args` | Send a message to update the state of part of the game.  E.g., `GameState SafeKeypad Disable` or `GameState CurrentPhase 2`
 `14Seg` | `14Seg address effect text` | Show `text` on 14 segment display specified by osc `address`, with specified `effect` (`Static`, `Scroll`, `Dissolve`). E.g.,  `14Seg /PM/Status Scroll "ASSEMBLING POWERLING"`
