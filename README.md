@@ -18,7 +18,7 @@ When a script is started, the processor stores the start time, and a nominal cur
 Event | Syntax | Semantics
 ------ | ------ | ------
 `Time` | `Time millis` | Change the nominal time to `millis` (or if prefixed with a +, add `millis` to the nominal time). Then wait until elapsed time (now - start time) catches up to nominal time.  E.g, `Time 1000`, `Time +100`
-`Delay` | `Delay millis` | Change the start time to be `millis` earlier, and wait until elapsed time catches up to the nominal time.  This effectively shifts all subsequent `Time` events (absolute and relative) to happen `millis` later.  E.g., `Delay 1000` 
+`Delay` | `Delay millis` | Change the start time to be `millis` earlier, and wait until elapsed time catches up to the nominal time.  This effectively shifts all subsequent `Time` events (absolute and relative) to happen `millis` later.  E.g., `Delay 1000` This is basically only useful when you have a long cue with lots of absolute timing information and you want to insert a pause into it, for instance, when the audio is changed to have a longer leadup
 `Trace` | `Trace text` | Print `text` to whatever console is available, for debugging and UX reasons.  Does nothing.  E.g., `Trace Starting Phase 1 Light Show`
 
 ## Other Events
