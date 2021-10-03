@@ -11,7 +11,7 @@ There are three special types of cues, which are fundamental to the scripting la
 
 ## Timing and Processing
 
-When a script is started, the processor stores the start time, and a nominal current offset (which starts at 0).  All script timings are relative to that start time. The processor will then dispatch events as fast as it can until it reaches a timing event (Time or Delay).  Note that the processor never just waits 100ms or whatever - it always waits for the next nominal time to come around, which means that any time spent processing events does not cause the whole script to drift in time.
+When a script is started, the processor stores the start time, and a nominal current offset (which starts at 0).  All script timings are relative to that start time. The processor will then dispatch events as fast as it can until it reaches a timing event (Time or Delay).  Note that all delays are based on the difference between the nominal time and hte current time, so even if slow processing delays an individual event a little, we catch up by the next timestamp, and in the pathological case where we run past that, we will catch up as soon as we have a chance, and then things immediately return to normal.  
 
 Event | Syntax | Semantics
 ------ | ------ | ------
@@ -29,3 +29,4 @@ Event | Syntax | Semantics
 `DMX` | `DMX address val1 [val2 ...]` | Set one or more DMX controlled lights with consecutive addresses, starting at `address`.  (Addresses can be named for ease of use) E.g, `DMX Sconces 0 0 0.5 0.5 1`
 `Audio` | `Audio file.wav gain speaker_mapping` | Plays a sound effect or music file named `file.wav`, with `gain`, routing audio according to the named speaker configuration `speaker_mapping`.  
 `GameState` | `GameState component args` | Send a message to update the state of part of the game.  E.g., `GameState SafeKeypad Disable` or `GameState CurrentPhase 2`
+`14Seg` | `14Seg address effect text` | Show `text` on 14 segment display specified by osc `address`, with specified `effect` (`Static`, `Scroll`, `Dissolve`). E.g.,  `14Seg /PM/Status Scroll "ASSEMBLING POWERLING"`
