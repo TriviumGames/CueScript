@@ -9,6 +9,8 @@ A script is text file containing a sequence of events, each of which is either a
 
 There are three special types of cues, which are fundamental to the scripting language itself.  Everything else is just application specific subsystems.
 
+Any cue types should be valid C identifiers, and any line not beginning with a C identifier should be treated as a comment.  (So `#This is a comment` would be fine, as would `------------`). 
+
 ## Timing and Processing
 
 When a script is started, the processor stores the start time, and a nominal current offset (which starts at 0).  All script timings are relative to that start time. The processor will then dispatch events as fast as it can until it reaches a timing event (Time or Delay).  Note that all delays are based on the difference between the nominal time and hte current time, so even if slow processing delays an individual event a little, we catch up by the next timestamp, and in the pathological case where we run past that, we will catch up as soon as we have a chance, and then things immediately return to normal.  
@@ -17,7 +19,7 @@ Event | Syntax | Semantics
 ------ | ------ | ------
 `Time` | `Time millis` | Change the nominal time to `millis` (or if prefixed with a +, add `millis` to the nominal time). Then wait until elapsed time (now - start time) catches up to nominal time.  E.g, `Time 1000`, `Time +100`
 `Delay` | `Delay millis` | Change the start time to be `millis` earlier, and wait until elapsed time catches up to the nominal time.  This effectively shifts all subsequent `Time` events (absolute and relative) to happen `millis` later.  E.g., `Delay 1000` 
-`Trace` | `Trace text` | Print `text` to whatever console is available, for debugging and UX reasons.  Does nothing.  E.g., `Trace Starting Phase 1 Light Show
+`Trace` | `Trace text` | Print `text` to whatever console is available, for debugging and UX reasons.  Does nothing.  E.g., `Trace Starting Phase 1 Light Show`
 
 ## Other Events
 

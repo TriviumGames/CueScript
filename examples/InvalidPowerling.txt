@@ -1,0 +1,22 @@
+Trace Invalid powerling formula
+---------
+# Disable inputs so players can't keep typing until after the failure cue is done
+GameState PowerlingMaker noInput
+
+# Play an error sound
+Audio PowerlingMakerInvalid.wav 1.0 PowerlingMaker
+
+# Turn off the lights on the buttons, so they know they can't interact with it during this cue
+OSC /PM/ButtonLeds 0 0 0 0 0
+
+# Report the error message
+14Seg /PM/Status Scroll INVALID FORMULA
+
+# Wait a bit for the text to scroll by
+Time 3300
+
+# Re-enable inpput 
+GameState PowerlingMaker ready
+
+# Turn the lights back on
+OSC /PM/ButtonLeds 1 1 1 1 1
