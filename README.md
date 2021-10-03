@@ -32,3 +32,25 @@ Event | Syntax | Semantics
 `Audio` | `Audio file.wav gain speaker_mapping` | Plays a sound effect or music file named `file.wav`, with `gain`, routing audio according to the named speaker configuration `speaker_mapping`.  
 `GameState` | `GameState component args` | Send a message to update the state of part of the game.  E.g., `GameState SafeKeypad Disable` or `GameState CurrentPhase 2`
 `14Seg` | `14Seg address effect text` | Show `text` on 14 segment display specified by osc `address`, with specified `effect` (`Static`, `Scroll`, `Dissolve`). E.g.,  `14Seg /PM/Status Scroll "ASSEMBLING POWERLING"`
+
+## Example
+
+```
+Trace Bookcase failure cue
+--------------------------
+# Wait half a second to even start
+Time 500
+
+# Play an error message
+Audio BooksWrong.wav 1 LibraryNorth
+
+# Set all the bookcase leds to red
+OSC /Bc/L/Leds 0xFF0000 0xFF0000 0xFF0000 0xFF0000
+OSC /Bc/R/Leds 0xFF0000 0xFF0000 0xFF0000 0xFF0000
+
+# Wait another second
+Time +1000
+
+# Tell the puzzle to restart the solve logic
+GameState BooksPuz ready
+```
