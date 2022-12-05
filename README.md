@@ -38,17 +38,20 @@ Event | Syntax | Semantics
 ```
 Trace Bookcase failure cue
 --------------------------
-# Wait half a second to even start
+# Don't do anything until half a second after the start of the script
 Time 500
 
 # Play an error message
 Audio BooksWrong.wav 1 LibraryNorth
 
+# Don't do anything until 650 ms after the start of the script.
+Time 650 
+
 # Set all the bookcase leds to red
 OSC /Bc/L/Leds 0xFF0000 0xFF0000 0xFF0000 0xFF0000
 OSC /Bc/R/Leds 0xFF0000 0xFF0000 0xFF0000 0xFF0000
 
-# Wait another second
+# Wait another second from whenever the last stuff we just did
 Time +1000
 
 # Tell the puzzle to restart the solve logic
